@@ -14,13 +14,13 @@ public static class QueryableExtensions
 
         if (!string.IsNullOrEmpty(filter.Keyword))
         {
-            var pre = HandleKeywordSearch(filter, properties, parameter);
+            var pre = KeywordSearch(filter, properties, parameter);
             if (pre != null) predicate = pre;
         }
 
         if (filter.AdvanceFilters is { Count: > 0 } advanceFilters)
         {
-            var pre = HandleAdvanceSearch(advanceFilters, properties, parameter);
+            var pre = AdvanceFilterSearch(advanceFilters, properties, parameter);
             if (pre != null)
                 predicate = predicate == null
                     ? pre
@@ -35,7 +35,7 @@ public static class QueryableExtensions
             .Where(lambda);
     }
 
-    private static Expression? HandleAdvanceSearch(List<SearchField> advancedSearchFields, PropertyInfo[] properties, Expression parameter)
+    private static Expression? AdvanceFilterSearch(List<SearchField> advancedSearchFields, PropertyInfo[] properties, Expression parameter)
     {
         if(advancedSearchFields.Count > DynamicSearchOption.AdvanceSearchFilterCapacity) 
             throw new IndexOutOfRangeException("Advance search filters must be less than 10.");
@@ -64,7 +64,7 @@ public static class QueryableExtensions
         return predicate;
     }
 
-    private static Expression? HandleKeywordSearch(AbstractSearch filter, PropertyInfo[] properties, Expression parameter)
+    private static Expression? KeywordSearch(AbstractSearch filter, PropertyInfo[] properties, Expression parameter)
     {
         var fields = filter.Fields;
         var keyword =  filter.Keyword;
