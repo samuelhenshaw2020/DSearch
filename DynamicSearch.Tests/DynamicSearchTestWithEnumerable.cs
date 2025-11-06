@@ -24,7 +24,7 @@ public class QueryableExtensionTestWithEnumerableLinq
     
     [Theory]
     [InlineData(1)]
-    [InlineData(100)]
+    [InlineData(2)]
     public void DynamicSearch_IsNotEmpty(int val)
     {
         var filter = new SearchFilter()
@@ -57,7 +57,7 @@ public class QueryableExtensionTestWithEnumerableLinq
             AdvanceFilters =
             [
                 new SearchField()
-                    { Property = nameof(TestData.Score), Operation = SearchOperations.LessThan, Value = 2 }
+                    { Property = nameof(TestData.Score), Operation = SearchOperations.GreaterThan, Value = 2000 }
             ]
         };
         var result = _enumerable

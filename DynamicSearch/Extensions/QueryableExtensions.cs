@@ -4,10 +4,10 @@ using System.Reflection;
 namespace DynamicSearch.Net;
 public static class QueryableExtensions
 {
-    public static IQueryable<TSource> SearchDynamic<TSource>(this IQueryable<TSource> queryable, SearchFilter filter)
+    public static IQueryable<TSource> SearchDynamic<TSource>(this IQueryable<TSource> queryable, AbstractSearch filter)
         where TSource : class
     {
-        ParameterExpression parameter = Expression.Parameter(typeof(TSource), "source");
+        ParameterExpression parameter = Expression.Parameter(typeof(TSource), "x");
         var properties = typeof(TSource).GetProperties();
         
         Expression? predicate = null;
@@ -26,7 +26,6 @@ public static class QueryableExtensions
                     ? pre
                     : Expression.AndAlso(predicate, pre);
         }
-
 
         if (predicate == null)
             return queryable;
@@ -65,7 +64,7 @@ public static class QueryableExtensions
         return predicate;
     }
 
-    private static Expression? HandleKeywordSearch(SearchFilter filter, PropertyInfo[] properties, Expression parameter)
+    private static Expression? HandleKeywordSearch(AbstractSearch filter, PropertyInfo[] properties, Expression parameter)
     {
         var fields = filter.Fields;
         var keyword =  filter.Keyword;
@@ -83,15 +82,19 @@ public static class QueryableExtensions
         Expression predicate = null!;
         foreach (var field in fields)
         {
-            if (properties.All(x => x.Name != field))
-                throw new Exception($"Property {field} not found");
-            var property = Expression.Property(parameter, field);
-            
-            var containsMethod = typeof(string).GetMethod(nameof(string.Contains), [typeof(string)]);
-            var lowCaseMethod = typeof(string).GetMethod(nameof(string.ToLower), Type.EmptyTypes);
-            var propertyLower = Expression.Call(property, lowCaseMethod!);
-            var keywordLower = Expression.Call(Expression.Constant(keyword), lowCaseMethod!);
-            var containExpr = Expression.Call(propertyLower, containsMethod!, keywordLower);
+            Expression property;
+            if (field.Contains('.'))
+            {
+                property = BuildNestedPropertyAccess(parameter, field);
+            }
+            else
+            {
+                if (properties.All(x => x.Name != field))
+                    throw new Exception($"Property {field} not found");
+                property = Expression.Property(parameter, field);
+            }
+          
+            var containExpr = BuildContainsExpression(property, keyword);
             
             predicate = predicate == null
                 ? containExpr
@@ -101,12 +104,47 @@ public static class QueryableExtensions
         return predicate;
     }
 
-    private static Expression HandleLogic(KeywordSearchLogic logic, Expression predicate, Expression parameter)
+    private static Expression BuildNestedPropertyAccess(Expression parameter, string propertyPath)
+    {
+        var properties = propertyPath.Split('.');
+        Expression expression = parameter;
+        
+        foreach (string prop in properties)
+        {
+            var propertyInfo = expression.Type.GetProperty(prop);
+            if (propertyInfo == null)
+                throw new Exception($"Property {prop} not found in {expression.Type.Name}");
+            
+            expression = Expression.Property(expression, propertyInfo);
+        }
+        
+        return expression;
+    }
+
+    private static Expression BuildContainsExpression(Expression property, string keyword)
+    {
+        var containsMethod = typeof(string).GetMethod(nameof(string.Contains), [typeof(string)]);
+        var lowCaseMethod = typeof(string).GetMethod(nameof(string.ToLower), Type.EmptyTypes);
+        
+        if (!property.Type.IsValueType && property.Type != typeof(string))
+        {
+            throw new Exception($"Property {property} must be a string type for keyword search");
+        }
+        
+        var notNullCheck = Expression.NotEqual(property, Expression.Constant(null, property.Type));
+        var propertyLower = Expression.Call(property, lowCaseMethod!);
+        var keywordLower = Expression.Call(Expression.Constant(keyword), lowCaseMethod!);
+        var containExpr = Expression.Call(propertyLower, containsMethod!, keywordLower);
+        
+        return Expression.AndAlso(notNullCheck, containExpr);
+    }
+
+    private static Expression HandleLogic(SearchLogic logic, Expression predicate, Expression parameter)
     {
         return  logic switch
         {
-            KeywordSearchLogic.And => Expression.AndAlso(predicate, parameter),
-            KeywordSearchLogic.Or => Expression.OrElse(predicate, parameter),
+            SearchLogic.And => Expression.AndAlso(predicate, parameter),
+            SearchLogic.Or => Expression.OrElse(predicate, parameter),
             _ => throw new ArgumentOutOfRangeException(nameof(logic), logic, null)
         };
     }
