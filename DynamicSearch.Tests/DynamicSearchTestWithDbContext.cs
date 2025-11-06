@@ -62,6 +62,7 @@ public class DynamicSearchTestWithDbContext :IDisposable
             Keyword = "Product 1",
             Fields = [nameof(Product.Name)],
         };
+        
         var result = _dbContext.Products
             .SearchDynamic(filter)
             .ToList();

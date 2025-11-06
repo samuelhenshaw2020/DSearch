@@ -18,7 +18,6 @@ public static class QueryableExtensions
             if (pre != null) predicate = pre;
         }
 
-
         if (filter.AdvanceFilters is { Count: > 0 } advanceFilters)
         {
             var pre = HandleAdvanceSearch(advanceFilters, properties, parameter);
@@ -56,7 +55,7 @@ public static class QueryableExtensions
 
             MemberExpression property = Expression.Property(parameter, field.Property);
 
-            ConvertPropertyToType(property.Type, field.Value.ToString(), out var keywordExpresison);
+            ConvertPropertyToType(property.Type, field.Value, out var keywordExpresison);
 
             var operationExpression = ParseOperationExpression(property, keywordExpresison, field.Operation);
             predicate = predicate == null
@@ -111,6 +110,7 @@ public static class QueryableExtensions
             _ => throw new ArgumentOutOfRangeException(nameof(logic), logic, null)
         };
     }
+    
     private static void ConvertPropertyToType(Type propertyType, object fieldValue, out Expression keyword)
     {
         if (propertyType == typeof(string))
