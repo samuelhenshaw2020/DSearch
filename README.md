@@ -1,4 +1,4 @@
-# DynamicSearch.Net
+# DSearch
 
 A powerful and flexible dynamic search library for .NET that enables keyword-based searching with support for navigation properties, advanced filtering, and multiple search operations.
 
