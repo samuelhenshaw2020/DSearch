@@ -1,10 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>DynamicSearch.Net</RootNamespace>
+        
+        <PackageId>DSearch</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Samuel Henshaw</Authors>
+        <Company>samuelhenshaw2020</Company>
+        <Product>DSearch</Product>
+        <Description>A powerful and flexible dynamic search library for .NET that enables keyword-based searching with support for navigation properties, advanced filtering, and multiple search operations. Perfect for building search functionality in your applications with minimal code.</Description>
+        <PackageTags>search;dynamic-search;filtering;linq;queryable;entity-framework;navigation-properties;keyword-search</PackageTags>
+        <PackageProjectUrl>https://github.com/samuelhenshaw2020/DSearch</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/samuelhenshaw2020/DSearch</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageReleaseNotes>
+            v1.0.0:
+            - Initial release
+            - Keyword search across multiple fields
+            - Support for navigation properties with dot notation
+            - Advanced filtering with multiple operations (Contains, Equals, StartsWith, EndsWith, GreaterThan, LessThan, etc.)
+            - AND/OR logic support
+            - Null-safe property access
+        </PackageReleaseNotes>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
 
 </Project>

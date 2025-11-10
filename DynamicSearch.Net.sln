@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicSearch", "DynamicSea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicSearch.Tests", "DynamicSearch.Tests\DynamicSearch.Tests.csproj", "{A2367DFB-3670-4BF2-82ED-A62231918198}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{3D9CCACB-1BE2-4B2D-914C-C6959F802123}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicSearch.WebApi", "DynamicSearch.WebApi\DynamicSearch.WebApi.csproj", "{77FBF484-0428-4BDE-804C-067321B0F2BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{11762B3E-ED8A-47DF-9392-EB02D8F73CE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,13 @@ Global
 		{A2367DFB-3670-4BF2-82ED-A62231918198}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2367DFB-3670-4BF2-82ED-A62231918198}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2367DFB-3670-4BF2-82ED-A62231918198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77FBF484-0428-4BDE-804C-067321B0F2BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77FBF484-0428-4BDE-804C-067321B0F2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77FBF484-0428-4BDE-804C-067321B0F2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77FBF484-0428-4BDE-804C-067321B0F2BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77FBF484-0428-4BDE-804C-067321B0F2BE} = {3D9CCACB-1BE2-4B2D-914C-C6959F802123}
+		{A2367DFB-3670-4BF2-82ED-A62231918198} = {11762B3E-ED8A-47DF-9392-EB02D8F73CE7}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,4 @@
-using DynamicSearch.Net;
+using DSearch;
 using Microsoft.EntityFrameworkCore;
 
 namespace DynamicSearch.Tests;
@@ -85,7 +85,7 @@ public class DynamicSearchTestWithDbContext : IDisposable
             .SetFields(["Category.Name", nameof(Product.Name)]);
         
         var result = _dbContext.Products
-            .SearchDynamic(filter)
+            .DynamicSearch(filter)
             .ToList();
         
         Assert.True(result.Count > 0);
@@ -110,7 +110,7 @@ public class DynamicSearchTestWithDbContext : IDisposable
             Logic = SearchLogic.Or
         };
         var result = _dbContext.Products
-            .SearchDynamic(filter)
+            .DynamicSearch(filter)
             .ToList();
         
         Assert.True(result.Count > 0);
@@ -128,7 +128,7 @@ public class DynamicSearchTestWithDbContext : IDisposable
         
         var result = _dbContext.Products
             .Include(p => p.Category) // Include navigation property
-            .SearchDynamic(filter)
+            .DynamicSearch(filter)
             .ToList();
         
         Assert.True(result.Count > 0);
@@ -147,7 +147,7 @@ public class DynamicSearchTestWithDbContext : IDisposable
         
         var result = _dbContext.Products
             .Include(p => p.Category)
-            .SearchDynamic(filter)
+            .DynamicSearch(filter)
             .ToList();
         
         Assert.True(result.Count > 0);
@@ -166,7 +166,7 @@ public class DynamicSearchTestWithDbContext : IDisposable
         };
         var result = _dbContext.Products
             .Include(p => p.Category)
-            .SearchDynamic(filter)
+            .DynamicSearch(filter)
             .ToList();
         Assert.True(result.Count > 0);
     }

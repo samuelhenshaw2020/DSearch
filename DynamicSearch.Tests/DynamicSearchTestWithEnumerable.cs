@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
-using DynamicSearch.Net;
+using DSearch;
 
 namespace DynamicSearch.Tests;
 
@@ -33,7 +33,7 @@ public class QueryableExtensionTestWithEnumerableLinq
             Fields = [nameof(TestData.Name)],
         };
         var result = _enumerable.AsQueryable()
-            .SearchDynamic(filter).ToList();
+            .DynamicSearch(filter).ToList();
         Assert.NotEmpty(result);
     }
     
@@ -43,9 +43,9 @@ public class QueryableExtensionTestWithEnumerableLinq
         var filter = new SearchFilter()
         {
             Keyword = "Name" + 100,
-            Fields = [nameof(TestData.Name)],
+            Fields = [nameof(TestData.Name)]
         };
-        var result = _enumerable.AsQueryable().SearchDynamic(filter).ToList();
+        var result = _enumerable.AsQueryable().DynamicSearch(filter).ToList();
         Assert.Empty(result);
     }
     
@@ -62,7 +62,7 @@ public class QueryableExtensionTestWithEnumerableLinq
         };
         var result = _enumerable
             .AsQueryable()
-            .SearchDynamic(filter).ToList();
+            .DynamicSearch(filter).ToList();
         Assert.NotEmpty(result);
     }
     

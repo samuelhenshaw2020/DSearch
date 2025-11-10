@@ -1,0 +1,16 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d4f33d8b_002Dcac3_002D4c19_002D81f0_002D7f45c8dc06b5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::A2367DFB-3670-4BF2-82ED-A62231918198::net9.0::DynamicSearch.Tests.QueryableExtensionTestWithEnumerableLinq&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::A2367DFB-3670-4BF2-82ED-A62231918198::net9.0::DynamicSearch.Tests.DynamicSearchTestWithDbContext.ShouldReturnAllProducts&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::A2367DFB-3670-4BF2-82ED-A62231918198::net9.0::DynamicSearch.Tests.DynamicSearchTestWithDbContext.ShouldSearchWithKeywordFilter_AndReturnListOfProductsThatMatchKeywordFilter&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::A2367DFB-3670-4BF2-82ED-A62231918198::net9.0::DynamicSearch.Tests.DynamicSearchTestWithDbContext.ShouldSearchMultipleFields_AndReturnListOfProductsThatMatchKeywordFilter&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::A2367DFB-3670-4BF2-82ED-A62231918198::net9.0::DynamicSearch.Tests.DynamicSearchTestWithDbContext.ShouldSearchMultipleFields_AndReturnList&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::A2367DFB-3670-4BF2-82ED-A62231918198::net9.0::DynamicSearch.Tests.DynamicSearchTestWithDbContext.ShouldSearchNavigationProperty_AndReturnList&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::A2367DFB-3670-4BF2-82ED-A62231918198::net9.0::DynamicSearch.Tests.DynamicSearchTestWithDbContext.ShouldSearchMultipleFieldsIncludingNavigationProperty_AndReturnList&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::A2367DFB-3670-4BF2-82ED-A62231918198::net9.0::DynamicSearch.Tests.DynamicSearchTestWithDbContext.ShouldSearchWithKeywordFilter_AndReturnList&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::A2367DFB-3670-4BF2-82ED-A62231918198::net9.0::DynamicSearch.Tests.DynamicSearchTestWithDbContext.ShouldSearchWithAdditionalFilter_AndReturnList&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ABooleanAsserts_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2025_002E2_003Fresharper_002Dhost_003FSourcesCache_003Fbfff78ecaa39c818519fc918bb2d4bbdca6ad93d7170f5cf325f67ccd0b97d43_003FBooleanAsserts_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ACollectionAsserts_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2025_002E2_003Fresharper_002Dhost_003FSourcesCache_003F906dc7459b29a3c66ebc05a3ab7a19f7e1a67a5d7e4d71f989e1efb37fadb1_003FCollectionAsserts_002Ecs/@EntryIndexedValue">ForceIncluded</s:String></wpf:ResourceDictionary>
