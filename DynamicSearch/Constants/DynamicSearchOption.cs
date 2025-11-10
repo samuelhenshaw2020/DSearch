@@ -1,4 +1,4 @@
-namespace DynamicSearch.Net;
+namespace DSearch;
 
 public record DynamicSearchOption
 {

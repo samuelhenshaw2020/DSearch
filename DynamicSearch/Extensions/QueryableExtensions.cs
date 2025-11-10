@@ -1,12 +1,15 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-namespace DynamicSearch.Net;
+namespace DSearch;
+
+
 public static class QueryableExtensions
 {
-    public static IQueryable<TSource> SearchDynamic<TSource>(this IQueryable<TSource> queryable, AbstractSearch filter)
+    public static IQueryable<TSource> DynamicSearch<TSource>(this IQueryable<TSource> queryable, AbstractSearch filter)
         where TSource : class
     {
+        if (filter == null) return queryable;
         ParameterExpression parameter = Expression.Parameter(typeof(TSource), "x");
         var properties = typeof(TSource).GetProperties();
         
@@ -196,7 +199,7 @@ public static class QueryableExtensions
                 var propertyLower = Expression.Call(property, lowCaseMethod!);
                 var keywordLower = Expression.Call(keyword, lowCaseMethod!);
                 var containsMethod = typeof(string).GetMethod(nameof(string.Contains), [typeof(string)]);
-                return Expression.Call(propertyLower, containsMethod!, keywordLower);
+                return Expression.Call(propertyLower, containsMethod!, keywordLower); // TODO how to use StringCOmparison
             case SearchOperations.LessThan:
                 return Expression.LessThan(property, keyword);
             case SearchOperations.GreaterThan:
@@ -206,10 +209,10 @@ public static class QueryableExtensions
             case SearchOperations.LessThanOrEqualTo:
                 return Expression.LessThanOrEqual(property, keyword);
             case SearchOperations.StartsWith:
-                var startWithMethod = typeof(string).GetMethod(nameof(string.Contains), [typeof(string)]);
+                var startWithMethod = typeof(string).GetMethod(nameof(string.StartsWith), [typeof(string)]);
                 return Expression.Call(property, startWithMethod!, keyword);
             case SearchOperations.EndsWith:
-                var endWithMethod = typeof(string).GetMethod(nameof(string.Contains), [typeof(string)]);
+                var endWithMethod = typeof(string).GetMethod(nameof(string.EndsWith), [typeof(string)]);
                 return Expression.Call(property, endWithMethod!, keyword);
             case SearchOperations.Equals:
                 if (property.Type == typeof(string))
