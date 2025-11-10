@@ -35,7 +35,7 @@ fi
 echo ""
 echo "Creating NuGet package..."
 cd ../DynamicSearch
-dotnet pack -c Release --no-build --output ../nupkgs
+dotnet pack -c Release --output ../nupkgs
 
 echo ""
 echo "=========================================="
