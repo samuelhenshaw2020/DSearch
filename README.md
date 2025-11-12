@@ -185,14 +185,14 @@ var results = await dbContext.Products
     .ToListAsync();
 ```
 
-## Support for pagination
+## Support to work with pagination libraries/solutions
 
-If you wish to use DSearch with your own pagination or other pagination library such as
+If you wish to use DSearch with your own pagination or other pagination library. e.g
 
 ```csharp
  dbContext.Users
     .DynamicSearch(filter) 
-    .ToPaginatedList(filter.PageNumber, filter.PageSize)
+    .ToPaginatedList(filter.PageNumber, filter.PageSize) // for any library
 ```
 
 Its easy with the `IAbstractSearch` or `IAbstractSearch<TSource>` interfaces. Because using the abstract class
