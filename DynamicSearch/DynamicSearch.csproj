@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         
         <PackageId>DSearch</PackageId>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <Authors>Samuel Henshaw</Authors>
         <Company>samuelhenshaw2020</Company>
         <Product>DSearch</Product>
@@ -18,13 +18,8 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>NUGGET_README.md</PackageReadmeFile>
         <PackageReleaseNotes>
-            v1.0.0:
-            - Initial release
-            - Keyword search across multiple fields
-            - Support for navigation properties with dot notation
-            - Advanced filtering with multiple operations (Contains, Equals, StartsWith, EndsWith, GreaterThan, LessThan, etc.)
-            - AND/OR logic support
-            - Null-safe property access
+            v1.0.3:
+            - Added support to work with pagination library using IAbstractSearch
         </PackageReleaseNotes>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
