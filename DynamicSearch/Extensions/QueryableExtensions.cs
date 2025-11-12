@@ -6,8 +6,8 @@ namespace DSearch;
 
 public static class QueryableExtensions
 {
-    public static IQueryable<TSource> DynamicSearch<TSource>(this IQueryable<TSource> queryable, AbstractSearch filter)
-        where TSource : class
+    public static IQueryable<TSource> DynamicSearch<TSource>(this IQueryable<TSource> queryable, IAbstractSearch filter)
+        
     {
         if (filter == null) return queryable;
         ParameterExpression parameter = Expression.Parameter(typeof(TSource), "x");
@@ -35,7 +35,7 @@ public static class QueryableExtensions
 
         Expression<Func<TSource, bool>> lambda = Expression.Lambda<Func<TSource, bool>>(predicate, parameter);
         return queryable
-            .Where(lambda);
+            .Where(lambda) ;
     }
 
     private static Expression? AdvanceFilterSearch(List<SearchField> advancedSearchFields, PropertyInfo[] properties, Expression parameter)
@@ -67,7 +67,7 @@ public static class QueryableExtensions
         return predicate;
     }
 
-    private static Expression? KeywordSearch(AbstractSearch filter, PropertyInfo[] properties, Expression parameter)
+    private static Expression? KeywordSearch(IAbstractSearch filter, PropertyInfo[] properties, Expression parameter)
     {
         var fields = filter.Fields;
         var keyword =  filter.Keyword;

@@ -1,6 +1,7 @@
 # DSearch
 
-A powerful and flexible dynamic search library for .NET that enables keyword-based searching with support for navigation properties, advanced filtering, and multiple search operations.
+A powerful and flexible dynamic search library for .NET that enables keyword-based searching with support for navigation
+properties, advanced filtering, and multiple search operations.
 
 [![NuGet](https://img.shields.io/nuget/v/DSearch.svg)](https://www.nuget.org/packages/DSearch/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -9,7 +10,8 @@ A powerful and flexible dynamic search library for .NET that enables keyword-bas
 
 - ✨ **Keyword Search**: Search across multiple fields with a single keyword
 - 🔗 **Navigation Properties**: Support for nested properties using dot notation (e.g., `"Category.Name"`)
-- 🎯 **Advanced Filtering**: Multiple search operations (Contains, Equals, StartsWith, EndsWith, GreaterThan, LessThan, etc.)
+- 🎯 **Advanced Filtering**: Multiple search operations (Contains, Equals, StartsWith, EndsWith, GreaterThan, LessThan,
+  etc.)
 - 🔀 **Flexible Logic**: AND/OR logic support for combining multiple search conditions
 - 🛡️ **Null-Safe**: Automatic null-checking for navigation properties
 - ⚡ **Efficient**: Uses Expression Trees for efficient LINQ queries
@@ -183,12 +185,59 @@ var results = await dbContext.Products
     .ToListAsync();
 ```
 
+## Support for pagination
+
+If you wish to use DSearch with your own pagination or other pagination library such as
+
+```csharp
+ dbContext.Users
+    .DynamicSearch(filter) 
+    .ToPaginatedList(filter.PageNumber, filter.PageSize)
+```
+
+Its easy with the `IAbstractSearch` or `IAbstractSearch<TSource>` interfaces. Because using the abstract class
+`AbstractSearch` or the generic counterpart `AbstractSearch<TSource>` ,
+might be tricky for some library that uses abstract class to extend pagination properties such as
+
+```csharp
+public class SearchProductRequest : Pagination, AbstractSearch // ❌
+```
+
+This wont work because C# does not allow extending from multiple classes at once like seen above, Except the
+pagination (library) uses an interface to implement the properties.
+Hence, the `IAbstractSearch` or `IAbstractSearch<TSource>` interface allows you to implement AbstractSearch propeties
+into your request DTO
+
+```csharp
+public class UserSearchFilter(int pageNumber, int pageSize) :  Pagination(pageNumber, pageSize), IAbstractSearch // or IAbsractSearch<TSource>
+{
+    public string? Keyword { get; set; }
+    public SearchLogic Logic { get; set; }
+    public HashSet<string> Fields { get; set; }
+    public List<SearchField>? AdvanceFilters { get; set; }
+}
+```
+
+this allows you search and paginate.
+
+```csharp
+ var filter = new UserSearchFilter(pageNumber, pageSize)
+ {
+            Keyword = "Clothing",
+            Fields = [nameof(Product.CategoryName), nameof(Product.Name)],
+            Logic = SearchLogic.Or
+ };
+
+_dbContext.Products
+     .DynamicSearch(filter)
+     .ToPaginatedList(filter.PageNumber, filter.PageSize); // or even ToPaginatedList(filter)
+```
+
 ## Best Practices
 
 1. **Limit the number of fields** to search for better performance (default max: 10)
 2. **Use appropriate search operations** - use `Equals` for exact matches, `Contains` for partial matches
-3. **Combine keyword and advanced filters** for more precise results
-4. **Consider indexing** frequently searched fields in your database
+3. **Consider indexing** frequently searched fields in your database
 
 ## Supported Types
 
@@ -208,18 +257,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Changelog
-
-### v1.0.0
-- Initial release
-- Keyword search across multiple fields
-- Support for navigation properties with dot notation
-- Advanced filtering with multiple operations
-- AND/OR logic support
-- Null-safe property access
-
-## Support
-
-If you encounter any issues or have questions, please file an issue on the [GitHub repository](https://github.com/samuelhenshaw2020/DSearch/issues).
-

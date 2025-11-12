@@ -7,42 +7,29 @@ namespace DSearch;
 /// </summary>
 public static class SearchExtensions
 {
-    // public static AbstractSearch<TSource> AddFields<TSource>(this AbstractSearch<TSource> source, Expression<Func<TSource, string?>> expression)
-    //     where TSource :  class
-    // {
-    //     return source;
-    // }
-    
-
-    public static AbstractSearch SetFields(this AbstractSearch source, HashSet<string> fields)
+    public static IAbstractSearch SetFields(this IAbstractSearch source, HashSet<string> fields)
     {
         source.Fields = fields;
-        return source;
+        return (AbstractSearch)source;
     }
     
-    // public static AbstractSearch<TSource> AddAdvanceFilter<TSource>(this AbstractSearch<TSource> source, Expression<Func<TSource, List<SearchField>>> expression)
-    //     where TSource :  class
-    // {
-    //     return source;
-    // }
-    
-    public static AbstractSearch SetKeywordSearchLogic(this AbstractSearch source, SearchLogic logic)
+    public static AbstractSearch SetKeywordSearchLogic(this IAbstractSearch source, SearchLogic logic)
     {
         source.Logic = logic;
-        return source;
+        return (AbstractSearch)source;
     }
 
-    public static AbstractSearch<TSource> SetKeywordSearchLogic<TSource>(this AbstractSearch<TSource> source, SearchLogic logic)
+    public static AbstractSearch<TSource> SetKeywordSearchLogic<TSource>(this IAbstractSearch<TSource> source, SearchLogic logic)
         where TSource :  class
     {
         source.Logic = logic;
-        return source;
+        return (AbstractSearch<TSource>)source;
     }
     
-    public static AbstractSearch SetKeyword(this AbstractSearch source, string keyword)
+    public static AbstractSearch SetKeyword(this IAbstractSearch source, string keyword)
     {
         source.Keyword = keyword;
-        return source;
+        return (AbstractSearch)source;
     }
 
     public static AbstractSearch<TSource> SetKeyword<TSource>(this AbstractSearch<TSource> source, string keyword)
