@@ -1,21 +1,10 @@
 # DSearch
 
 A powerful and flexible dynamic search library for .NET that enables keyword-based searching with support for navigation
-properties, advanced filtering, and multiple search operations.
+properties, advanced filtering, and multiple search operations. it uses expression trees for efficient LINQ queries, and works seemlessly with Ef core and IQueryable
 
 [![NuGet](https://img.shields.io/nuget/v/DSearch.svg)](https://www.nuget.org/packages/DSearch/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-## Features
-
-- ✨ **Keyword Search**: Search across multiple fields with a single keyword
-- 🔗 **Navigation Properties**: Support for nested properties using dot notation (e.g., `"Category.Name"`)
-- 🎯 **Advanced Filtering**: Multiple search operations (Contains, Equals, StartsWith, EndsWith, GreaterThan, LessThan,
-  etc.)
-- 🔀 **Flexible Logic**: AND/OR logic support for combining multiple search conditions
-- 🛡️ **Null-Safe**: Automatic null-checking for navigation properties
-- ⚡ **Efficient**: Uses Expression Trees for efficient LINQ queries
-- 🔧 **Easy Integration**: Works seamlessly with Entity Framework Core and IQueryable
 
 ## Installation
 
